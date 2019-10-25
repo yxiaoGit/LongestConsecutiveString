@@ -1,0 +1,52 @@
+import java.util.List;
+import java.util.ArrayList;
+
+
+public class SubString {
+
+	public static void main(String[] args) {
+
+		String a1 = "12311m22n33";
+
+		char[] arrays = (a1+"\n").toCharArray();
+
+		//value is char +"_" +  start
+		List<String[]> lists = new ArrayList<>();
+
+		int len = 0;
+		int start = -1;
+		char prev = '\n';
+		int position= -1;
+		int maxLen = 0;
+		for (char a: arrays) {
+			position++;
+			if (a != prev) {
+				if (len > maxLen ) {
+					lists.clear();	
+					String[] sq = {prev+"", start+""};
+					lists.add(sq);
+					maxLen = len;
+					
+				} else if ( len == maxLen && len != 0) {
+					String[] sq = {prev+"", start+""};
+					lists.add(sq);
+				}
+
+				prev = a;
+				len = 1;
+				start = position;
+
+			} else {
+				len++;
+			}
+		}
+
+		for(String[] a: lists) {
+			
+			String s = a[0];
+			String st = a[1];
+			System.out.println("The longest length: " + maxLen + " is char: " + s + " start at : " + st);
+		}
+
+	}
+}
